@@ -3,7 +3,7 @@ import { supabase } from "@/app/utils/client";
 export async function GET() {
   try {
     let { data: products, error } = await supabase
-      .from("tbl_blog")
+      .from("tbl_posts")
       .select("*");
     return Response.json(products, { status: 200 });
   } catch (error) {
