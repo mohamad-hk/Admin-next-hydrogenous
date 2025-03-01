@@ -27,7 +27,7 @@ const NavbarDesktop = () => {
   return (
     <>
       <nav
-        className={`hidden md:block bg-gray-900 text-white shadow-md md:h-screen transition-all duration-500 ease-in-out ${
+        className={`hidden md:block bg-gray-900 text-white shadow-md z-10 md:h-screen transition-all duration-500 ease-in-out ${
           isMenuOpen ? "w-60" : "w-16"
         }`}
         onMouseEnter={() => setIsMenuOpen(true)}

@@ -6,7 +6,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="ar" dir="rtl">
       <body>
-        <div className="lg:grid lg:grid-cols-[240px_minmax(900px,_1fr)_0px] lg:h-full">
+        <div className=" md:grid md:grid-cols-[64px,_1fr] lg:h-full">
           <AdminNavbar />
           <Providers>{children}</Providers>
         </div>
