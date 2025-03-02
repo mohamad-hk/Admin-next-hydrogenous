@@ -1,7 +1,11 @@
-export default function Home() {
+import Login from "./components/Login/page";
+
+const Admin = () => {
   return (
     <>
-      <div className="  "></div>
+      <Login />
     </>
   );
-}
+};
+
+export default Admin;

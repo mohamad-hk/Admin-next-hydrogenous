@@ -16,18 +16,18 @@ const NavbarDesktop = () => {
   const pathname = usePathname();
 
   const menuItems = [
-    { name: "داشبورد", icon: <FiHome />, href: "/" },
+    { name: "داشبورد", icon: <FiHome />, href: "/dashboard" },
     { name: "سفارشات", icon: <FiShoppingCart />, href: "/orders" },
     { name: "محصولات", icon: <FiBox />, href: "/products" },
     { name: "کاربران", icon: <FiUsers />, href: "/users" },
     { name: "وبلاگ", icon: <FiEdit />, href: "/blog" },
     { name: "اسلایدر", icon: <FiImage />, href: "/slider" },
-    { name: "ایمیل ها", icon: <FiMail />, href: "/email" },
+    { name: "تیکت", icon: <FiMail />, href: "/email" },
   ];
   return (
     <>
       <nav
-        className={`hidden md:block bg-gray-900 text-white shadow-md z-10 md:h-screen transition-all duration-500 ease-in-out ${
+        className={`hidden md:block bg-gray-900 text-white shadow-md z-20 md:h-screen transition-all duration-500 ease-in-out ${
           isMenuOpen ? "w-60" : "w-16"
         }`}
         onMouseEnter={() => setIsMenuOpen(true)}

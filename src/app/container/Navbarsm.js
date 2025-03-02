@@ -18,7 +18,7 @@ const NavbarMobile = () => {
   const pathname = usePathname();
 
   const menuItems = [
-    { name: "داشبورد", icon: <FiHome />, href: "/" },
+    { name: "داشبورد", icon: <FiHome />, href: "/dashboard" },
     { name: "سفارشات", icon: <FiShoppingCart />, href: "/orders" },
     { name: "محصولات", icon: <FiBox />, href: "/products" },
     { name: "کاربران", icon: <FiUsers />, href: "/users" },
