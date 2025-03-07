@@ -10,6 +10,7 @@ import {
 import PersianNumbers from "../utils/ToPersianNumber";
 import useSWR from "swr";
 import convertToPersianDate from "../utils/ConvertToPersianDate";
+import DeleteUser from "../components/Users/DeleteUser";
 
 const Users = () => {
   const fetcher = async (url) => {
@@ -21,7 +22,7 @@ const Users = () => {
     data: users,
     error,
     isLoading,
-  } = useSWR("https://adminhydrogenous.vercel.app/api/GetUsers", fetcher);
+  } = useSWR("https://adminhydrogenous.vercel.appapi/GetUsers", fetcher);
 
   return (
     <>
@@ -32,6 +33,7 @@ const Users = () => {
           <TableColumn> ایمیل </TableColumn>
           <TableColumn> تاریخ تولد </TableColumn>
           <TableColumn> زمان ایجاد حساب کاربری </TableColumn>
+          <TableColumn> عملیات </TableColumn>
         </TableHeader>
         <TableBody>
           {users?.map((user, index) => {
@@ -46,6 +48,9 @@ const Users = () => {
                   <TableCell>{user.data_of_birth}</TableCell>
                   <TableCell>
                     {convertToPersianDate(user.create_Account)}
+                  </TableCell>
+                  <TableCell>
+                    <DeleteUser c_id={user.customer_id} />
                   </TableCell>
                 </TableRow>
               </>

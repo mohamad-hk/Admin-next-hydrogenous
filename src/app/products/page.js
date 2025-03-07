@@ -9,6 +9,7 @@ import {
 } from "@heroui/react";
 import PersianNumbers from "../utils/ToPersianNumber";
 import useSWR from "swr";
+import OptionsProduct from "../components/Products/OptionsProduct";
 
 const Products = () => {
   const fetcher = async (url) => {
@@ -20,8 +21,14 @@ const Products = () => {
     data: products,
     error,
     isLoading,
-  } = useSWR("https://adminhydrogenous.vercel.app/api/GetProducts", fetcher);
+  } = useSWR(`https://adminhydrogenous.vercel.appapi/GetProducts`, fetcher);
 
+  // آیدی رو ست کنم
+  // const {
+  //   data: products,
+  //   error,
+  //   isLoading,
+  // } = useSWR("https://adminhydrogenous.vercel.appapi/GetProducts", fetcher);
 
   return (
     <>
@@ -36,6 +43,7 @@ const Products = () => {
           <TableColumn>تعداد فروش</TableColumn>
           <TableColumn>فعال</TableColumn>
           <TableColumn>ویژه</TableColumn>
+          <TableColumn>عملیات</TableColumn>
         </TableHeader>
         <TableBody>
           {products?.map((product, index) => {
@@ -59,6 +67,18 @@ const Products = () => {
                   </TableCell>
                   <TableCell>{product.active}</TableCell>
                   <TableCell>{product.special}</TableCell>
+                  <TableCell>
+                    <OptionsProduct
+                      p_id={product.product_id}
+                      refreshData={() =>
+                        mutate(
+                          user
+                            ? `https://adminhydrogenous.vercel.app/api/Shipments/GetShipment?cust_id=${user.customer_id}`
+                            : null
+                        )
+                      }
+                    />
+                  </TableCell>
                 </TableRow>
               </>
             );
