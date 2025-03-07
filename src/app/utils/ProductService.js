@@ -1,7 +1,7 @@
 export const getProduct = async (input_params) => {
   try {
     const response = await fetch(
-      `https://adminhydrogenous.vercel.app/api/Products/GetShipment?${input_params}`
+      `https://adminhydrogenous.vercel.app/api/Products/GetProduct?${input_params}`
     );
 
     if (!response.ok) {
