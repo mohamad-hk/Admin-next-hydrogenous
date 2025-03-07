@@ -72,9 +72,7 @@ const Products = () => {
                       p_id={product.product_id}
                       refreshData={() =>
                         mutate(
-                          user
-                            ? `https://adminhydrogenous.vercel.app/api/Shipments/GetShipment?cust_id=${user.customer_id}`
-                            : null
+                          `/api/Products/GetProduct?product_id=${product.product_id}`
                         )
                       }
                     />

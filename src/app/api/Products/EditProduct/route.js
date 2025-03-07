@@ -22,7 +22,7 @@ export async function PATCH(req) {
     }
 
     const { data: existingData, error: fetchError } = await supabase
-      .from("tbl_product")
+      .from("tbl_products")
       .select("*")
       .eq("product_id", p_id);
 

@@ -58,25 +58,28 @@ export default function EditProduct({ p_id, refresh }) {
   }, [isOpen]);
   const updateData = async () => {
     try {
-      const response = await fetch("https://adminhydrogenous.vercel.app/api/Products/EditProduct", {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          p_id,
-          product_name,
-          product_price,
-          discount_percent,
-          discount_price,
-          product_photo,
-          stock,
-          t_category_id,
-          m_category_id,
-          active,
-          special,
-        }),
-      });
+      const response = await fetch(
+        "https://adminhydrogenous.vercel.app/api/Products/EditProduct",
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            p_id,
+            product_name,
+            product_price,
+            discount_percent,
+            discount_price,
+            product_photo,
+            stock,
+            t_category_id,
+            m_category_id,
+            active,
+            special,
+          }),
+        }
+      );
 
       const data = await response.json();
       if (response.ok) {
@@ -131,13 +134,14 @@ export default function EditProduct({ p_id, refresh }) {
                       onChange={(e) => setDiscountPercent(e.target.value)}
                     />
                     <Input
-                      label="تخفیف قیمتی "
+                      label="تخفیف قیمتی"
                       type="tel"
-                      value={discount_price ? discount_price : null}
+                      value={discount_price || ""}
                       onClick={(e) => e.stopPropagation()}
                       onMouseDown={(e) => e.stopPropagation()}
                       onChange={(e) => setDiscountPrice(e.target.value)}
                     />
+
                     <Input
                       label="عکس محصول "
                       type="text"

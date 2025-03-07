@@ -11,7 +11,7 @@ export async function DELETE(req) {
 
   try {
     const { error } = await supabase
-      .from("tbl_product")
+      .from("tbl_products")
       .delete()
       .eq("product_id", p_id);
 
