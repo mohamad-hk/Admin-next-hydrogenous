@@ -1,12 +1,18 @@
 import { supabase } from "@/app/utils/client";
 
 export async function GET(req) {
-  try {
-    let { data: products, error } = await supabase
-      .from("tbl_products")
-      .select("*");
-    return Response.json(products, { status: 200 });
-  } catch (error) {
-    return Response.json({ error: error.message }, { status: 500 });
+  const { searchParams } = new URL(req.url);
+  const pId = searchParams.get("product_id");
+  if (pId) {
+    try {
+      let { data: shipments, error } = await supabase
+        .from("tbl_products")
+        .select("*")
+        .eq("product_id", pId);
+
+      return Response.json(shipments, { status: 200 });
+    } catch (err) {
+      return Response.json({ error: err.message }, { status: 500 });
+    }
   }
 }
