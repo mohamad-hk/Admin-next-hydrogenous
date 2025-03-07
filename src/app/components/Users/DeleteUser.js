@@ -16,7 +16,7 @@ const DeleteUser = ({ c_id, refresh }) => {
   const removeAddress = async (input_params) => {
     try {
       const response = await fetch(
-        `https://adminhydrogenous.vercel.app/api/Products/DeleteUser?${input_params}`,
+        `https://adminhydrogenous.vercel.app/api/Users/DeleteUser?${input_params}`,
         {
           method: "DELETE",
           headers: {

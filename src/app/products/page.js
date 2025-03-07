@@ -21,7 +21,7 @@ const Products = () => {
     data: products,
     error,
     isLoading,
-  } = useSWR(`https://adminhydrogenous.vercel.appapi/GetProducts`, fetcher);
+  } = useSWR(`https://adminhydrogenous.vercel.app/api/GetProducts`, fetcher);
 
   // آیدی رو ست کنم
   // const {

@@ -8,9 +8,7 @@ const Blog = () => {
   const [posts, setpost] = useState();
 
   const getpost = async () => {
-    const data = await fetch(
-      "https://adminhydrogenous.vercel.app/api/GetBlogs"
-    );
+    const data = await fetch("https://adminhydrogenous.vercel.app/api/GetBlogs");
     const response = await data.json();
     setpost(response);
   };

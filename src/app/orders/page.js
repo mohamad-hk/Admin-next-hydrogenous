@@ -43,11 +43,12 @@ const Order = () => {
                   <TableCell>{order.order_code}</TableCell>
                   <TableCell>{order.l_products}</TableCell>
                   <TableCell>
-
-                  {PersianNumbers(order.total_price) + " تومان"}
+                    {PersianNumbers(order.total_price) + " تومان"}
                   </TableCell>
                   <TableCell>{PersianNumbers(order.price_deliver)}</TableCell>
-                  <TableCell>{ convertToPersianDate(order.order_date)}</TableCell>
+                  <TableCell>
+                    {convertToPersianDate(order.order_date)}
+                  </TableCell>
                   <TableCell>{order.method_sending}</TableCell>
                   <TableCell>{order.status_order}</TableCell>
                 </TableRow>
