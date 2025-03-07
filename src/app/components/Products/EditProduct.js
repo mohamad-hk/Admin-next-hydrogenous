@@ -1,4 +1,5 @@
 "use client";
+import { getProduct } from "@/app/utils/ProductService";
 import {
   Modal,
   ModalContent,
