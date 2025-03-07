@@ -58,28 +58,25 @@ export default function EditProduct({ p_id, refresh }) {
   }, [isOpen]);
   const updateData = async () => {
     try {
-      const response = await fetch(
-        "https://adminhydrogenous.vercel.app/api/Products/EditProduct",
-        {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            p_id,
-            product_name,
-            product_price,
-            discount_percent,
-            discount_price,
-            product_photo,
-            stock,
-            t_category_id,
-            m_category_id,
-            active,
-            special,
-          }),
-        }
-      );
+      const response = await fetch("https://adminhydrogenous.vercel.app/api/Products/EditProduct", {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          p_id,
+          product_name,
+          product_price,
+          discount_percent,
+          discount_price,
+          product_photo,
+          stock,
+          t_category_id,
+          m_category_id,
+          active,
+          special,
+        }),
+      });
 
       const data = await response.json();
       if (response.ok) {
@@ -115,7 +112,7 @@ export default function EditProduct({ p_id, refresh }) {
                       value={product_name}
                       onClick={(e) => e.stopPropagation()}
                       onMouseDown={(e) => e.stopPropagation()}
-                      onChange={(e) => setFitstName(e.target.value)}
+                      onChange={(e) => setProductName(e.target.value)}
                     />
                     <Input
                       label="قیمت محصول "
@@ -123,7 +120,7 @@ export default function EditProduct({ p_id, refresh }) {
                       value={product_price}
                       onClick={(e) => e.stopPropagation()}
                       onMouseDown={(e) => e.stopPropagation()}
-                      onChange={(e) => setLastName(e.target.value)}
+                      onChange={(e) => setProductPrice(e.target.value)}
                     />
                     <Input
                       label="تخفیف درصدی "
@@ -131,15 +128,15 @@ export default function EditProduct({ p_id, refresh }) {
                       value={discount_percent}
                       onClick={(e) => e.stopPropagation()}
                       onMouseDown={(e) => e.stopPropagation()}
-                      onChange={(e) => setPhone(e.target.value)}
+                      onChange={(e) => setDiscountPercent(e.target.value)}
                     />
                     <Input
                       label="تخفیف قیمتی "
                       type="tel"
-                      value={discount_price}
+                      value={discount_price ? discount_price : null}
                       onClick={(e) => e.stopPropagation()}
                       onMouseDown={(e) => e.stopPropagation()}
-                      onChange={(e) => setLandline(e.target.value)}
+                      onChange={(e) => setDiscountPrice(e.target.value)}
                     />
                     <Input
                       label="عکس محصول "
@@ -147,7 +144,7 @@ export default function EditProduct({ p_id, refresh }) {
                       value={product_photo}
                       onClick={(e) => e.stopPropagation()}
                       onMouseDown={(e) => e.stopPropagation()}
-                      onChange={(e) => setState(e.target.value)}
+                      onChange={(e) => setProductPhoto(e.target.value)}
                     />
                     <Input
                       label="تعداد موجود در انبار "
@@ -155,7 +152,7 @@ export default function EditProduct({ p_id, refresh }) {
                       value={stock}
                       onClick={(e) => e.stopPropagation()}
                       onMouseDown={(e) => e.stopPropagation()}
-                      onChange={(e) => setCity(e.target.value)}
+                      onChange={(e) => setStock(e.target.value)}
                     />
                     <Input
                       label="دسته بندی اول"
@@ -163,7 +160,7 @@ export default function EditProduct({ p_id, refresh }) {
                       value={t_category_id}
                       onClick={(e) => e.stopPropagation()}
                       onMouseDown={(e) => e.stopPropagation()}
-                      onChange={(e) => setZipCode(e.target.value)}
+                      onChange={(e) => setTcategory(e.target.value)}
                     />
                     <Input
                       label=" دسته بندی دوم "
@@ -171,7 +168,7 @@ export default function EditProduct({ p_id, refresh }) {
                       value={m_category_id}
                       onClick={(e) => e.stopPropagation()}
                       onMouseDown={(e) => e.stopPropagation()}
-                      onChange={(e) => setZipCode(e.target.value)}
+                      onChange={(e) => setMcategory(e.target.value)}
                     />
                     <CheckboxGroup orientation="horizontal">
                       <Checkbox value={active}>فعال</Checkbox>
