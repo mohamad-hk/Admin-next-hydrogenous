@@ -59,7 +59,7 @@ export default function EditProduct({ p_id, refresh }) {
   const updateData = async () => {
     try {
       const response = await fetch(
-        "https://adminhydrogenous.vercel.app/api/Products/EditProduct",
+        "/api/Products/EditProduct",
         {
           method: "PATCH",
           headers: {
@@ -90,7 +90,7 @@ export default function EditProduct({ p_id, refresh }) {
     } catch (error) {
       console.error("Error:", error);
     }
-    refresh();
+    // refresh();
     onClose();
   };
   return (
@@ -152,7 +152,7 @@ export default function EditProduct({ p_id, refresh }) {
                     />
                     <Input
                       label="تعداد موجود در انبار "
-                      type="text"
+                      type="number"
                       value={stock}
                       onClick={(e) => e.stopPropagation()}
                       onMouseDown={(e) => e.stopPropagation()}

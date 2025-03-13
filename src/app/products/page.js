@@ -10,6 +10,7 @@ import {
 import PersianNumbers from "../utils/ToPersianNumber";
 import useSWR from "swr";
 import OptionsProduct from "../components/Products/OptionsProduct";
+import AddProduct from "../components/Products/AddProduct";
 
 const Products = () => {
   const fetcher = async (url) => {
@@ -21,7 +22,10 @@ const Products = () => {
     data: products,
     error,
     isLoading,
-  } = useSWR(`https://adminhydrogenous.vercel.app/api/Products/GetProducts`, fetcher);
+  } = useSWR(
+    `https://adminhydrogenous.vercel.app/api/Products/GetProducts`,
+    fetcher
+  );
 
   // آیدی رو ست کنم
   // const {
@@ -32,6 +36,11 @@ const Products = () => {
 
   return (
     <>
+      <AddProduct
+        refreshData={() =>
+          mutate(`/api/Products/GetProduct?product_id=${product.product_id}`)
+        }
+      />
       <Table className="">
         <TableHeader>
           <TableColumn>نام محصول</TableColumn>
