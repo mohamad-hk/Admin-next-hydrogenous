@@ -22,7 +22,7 @@ const Users = () => {
     data: users,
     error,
     isLoading,
-  } = useSWR("https://adminhydrogenous.vercel.app/api/GetUsers", fetcher);
+  } = useSWR("/api/Users/GetUsers", fetcher);
 
   return (
     <>
