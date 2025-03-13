@@ -2,12 +2,14 @@
   "name": "admin",
   "version": "0.1.0",
   "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
-  },
+"scripts": {
+  "dev": "next dev",
+  "build": "next build",
+  "start": "next start",
+  "lint": "next lint",
+  "preinstall": "npm install --force"
+},
+
   "dependencies": {
     "@heroui/react": "^2.7.4",
     "@heroui/system": "^2.4.11",
