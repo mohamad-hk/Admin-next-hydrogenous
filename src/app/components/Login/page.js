@@ -28,7 +28,7 @@ export default function Login() {
   };
 
   return (
-    <div className="h-screen flex flex-col justify-center  w-[20vw] mx-auto">
+    <div className="h-screen flex flex-col justify-center w-[80%] md:w-[50%] lg:w-[30%]  xl:w-[25%] mx-auto">
       <div className="flex flex-col gap-3 items-center border rounded-md shadow-md p-5">
         <h1 className="text-center text-xl font-semibold">پنل ادمین</h1>
         <Image src={"/images/statics/logo.png"} width={300} height={150} alt="image not found"/>
