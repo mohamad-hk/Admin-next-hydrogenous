@@ -29,7 +29,7 @@ const DeleteUser = ({ c_id, refresh }) => {
 
       if (response.ok) {
         console.log("done", result);
-        refresh();
+        // refresh();
       } else {
         console.error("Failed to delete shipment:", result.error);
       }

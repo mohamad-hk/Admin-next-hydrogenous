@@ -41,7 +41,17 @@ const Order = () => {
               <>
                 <TableRow key={index}>
                   <TableCell>{order.order_code}</TableCell>
-                  <TableCell>{order.l_products}</TableCell>
+                  <TableCell>
+                    {Array.isArray(order.l_products)
+                      ? order.l_products
+                          .map(
+                            (p) =>
+                              `${p.name} (${PersianNumbers(p.quantity)} عدد)`
+                          )
+                          .join("، ")
+                      : order.l_products}
+                  </TableCell>
+
                   <TableCell>
                     {PersianNumbers(order.total_price) + " تومان"}
                   </TableCell>
