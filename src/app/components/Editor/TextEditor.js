@@ -5,8 +5,8 @@ import { Editor } from "@tinymce/tinymce-react";
 export default function TextEditor({ onChange, initialValue }) {
 
   return (
-    <Editor
-      apiKey="tbcoajdje3qd3ko22vfhgmsenuj0osmac2syprih2lh9vgle"
+    <Editor 
+      apiKey="lney04xidi1q1ce099pgzvke2pdv3mlck1dqt4plsxvgr90e"
       initialValue={initialValue} 
       init={{
         height: 400,
