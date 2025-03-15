@@ -19,7 +19,7 @@ export default function AddProduct({ refresh }) {
   const [product_price, setProductPrice] = useState("");
   const [discount_percent, setDiscountPercent] = useState("");
   const [discount_price, setDiscountPrice] = useState("");
-  const [product_photo, setProductPhoto] = useState(null); // 📌 مدیریت فایل
+  const [product_photo, setProductPhoto] = useState(null);
   const [stock, setStock] = useState("");
   const [t_category_id, setTcategory] = useState("");
   const [m_category_id, setMcategory] = useState("");
@@ -33,7 +33,6 @@ export default function AddProduct({ refresh }) {
 
   const addProduct = async () => {
     if (!product_name || !product_price || !stock || !t_category_id || !m_category_id || !product_photo) {
-      alert("لطفاً تمام فیلدهای ضروری را پر کنید.");
       return;
     }
 
