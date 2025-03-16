@@ -95,7 +95,7 @@ export default function AddBlog() {
     };
 
     try {
-      const res = await fetch("/api/AddPost", {
+      const res = await fetch("/api/Posts/AddPost", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(postData),

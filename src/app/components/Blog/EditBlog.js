@@ -70,7 +70,7 @@ export default function EditBlog({ post, onUpdate }) {
     };
 
     try {
-      const res = await fetch("/api/EditPost", {
+      const res = await fetch("/api/Posts/EditPost", {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(updatedData),

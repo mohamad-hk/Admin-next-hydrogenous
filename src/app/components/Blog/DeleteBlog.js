@@ -16,7 +16,7 @@ export default function DeleteBlog({ postId, onDelete }) {
   const deletePost = async () => {
     setLoading(true);
     try {
-      const res = await fetch(`/api/DeletePost?id=${postId}`, {
+      const res = await fetch(`/api/Posts/DeletePost?id=${postId}`, {
         method: "DELETE",
       });
 

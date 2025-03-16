@@ -13,7 +13,7 @@ const Blog = () => {
 
   const getpost = async () => {
     const data = await fetch(
-      "https://adminhydrogenous.vercel.app/api/GetBlogs"
+      "https://adminhydrogenous.vercel.app/api/Posts/GetBlogs"
     );
     const response = await data.json();
     setpost(response);
