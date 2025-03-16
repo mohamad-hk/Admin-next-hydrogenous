@@ -29,28 +29,30 @@ const Email = () => {
   }, []);
   return (
     <>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 mt-5">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 mt-5 p-5">
         {emails?.map((email) => {
           return (
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-3 p-2 shadow-lg">
               <div className="flex flex-row items-center gap-2">
-                <GoPerson />
-                <p>نام وانام خانوادگی</p>
+                <GoPerson className="text-2xl" />
+                <p>نام و نام خانوادگی</p>
                 <p>{email.fn + " " + email.ln}</p>
               </div>
               <div className="flex flex-row items-center gap-2">
-                <MdSubject />
+                <MdSubject className="text-2xl" />
                 <p>موضوع پیام</p>
                 <p>{email.subject}</p>
               </div>
-              <div className="flex flex-row items-center gap-2">
-                <PiChatText />
-                <p>متن پیام</p>
-                <p>{email.message}</p>
+              <div className="flex flex-col gap-2">
+                <div className="flex flex-row gap-2">
+                  <PiChatText className="text-2xl" />
+                  <p>متن پیام</p>
+                </div>
+                <p className="text-justify">{email.message}</p>
               </div>
               <div className="flex flex-row items-center gap-2">
-                <SlCalender />
-                <p>تاریخ ارسال</p>
+                <SlCalender className="text-2xl" />
+                <p>تاریخ رسال</p>
                 <p>{convertToPersianDate(email.created_at)}</p>
               </div>
             </div>
