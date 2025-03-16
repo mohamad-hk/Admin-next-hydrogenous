@@ -22,7 +22,7 @@ const NavbarDesktop = () => {
     { name: "کاربران", icon: <FiUsers />, href: "/users" },
     { name: "وبلاگ", icon: <FiEdit />, href: "/blog" },
     { name: "اسلایدر", icon: <FiImage />, href: "/slider" },
-    { name: "تیکت", icon: <FiMail />, href: "/email" },
+    { name: "پیام ها", icon: <FiMail />, href: "/email" },
   ];
   return (
     <>

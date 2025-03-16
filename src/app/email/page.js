@@ -1,0 +1,64 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import convertToPersianDate from "../utils/ConvertToPersianDate";
+import { GoPerson } from "react-icons/go";
+import { MdSubject } from "react-icons/md";
+import { PiChatText } from "react-icons/pi";
+import { SlCalender } from "react-icons/sl";
+
+const Email = () => {
+  const [emails, SetEmails] = useState();
+  const GetSlider = async () => {
+    try {
+      const response = await fetch(
+        "https://adminhydrogenous.vercel.app/api/Email/GetEmails"
+      );
+      if (!response.ok) {
+        throw new Error("Failed to fetch sliders");
+      }
+      const res = await response.json();
+      SetEmails(res);
+    } catch (error) {
+      console.error("Error fetching sliders:", error);
+    }
+  };
+
+  useEffect(() => {
+    GetSlider();
+  }, []);
+  return (
+    <>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 mt-5">
+        {emails?.map((email) => {
+          return (
+            <div className="flex flex-col gap-2">
+              <div className="flex flex-row items-center gap-2">
+                <GoPerson />
+                <p>نام وانام خانوادگی</p>
+                <p>{email.fn + " " + email.ln}</p>
+              </div>
+              <div className="flex flex-row items-center gap-2">
+                <MdSubject />
+                <p>موضوع پیام</p>
+                <p>{email.subject}</p>
+              </div>
+              <div className="flex flex-row items-center gap-2">
+                <PiChatText />
+                <p>متن پیام</p>
+                <p>{email.message}</p>
+              </div>
+              <div className="flex flex-row items-center gap-2">
+                <SlCalender />
+                <p>تاریخ ارسال</p>
+                <p>{convertToPersianDate(email.created_at)}</p>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </>
+  );
+};
+
+export default Email;

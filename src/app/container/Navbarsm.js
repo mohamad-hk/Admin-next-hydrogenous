@@ -24,7 +24,7 @@ const NavbarMobile = () => {
     { name: "کاربران", icon: <FiUsers />, href: "/users" },
     { name: "وبلاگ", icon: <FiEdit />, href: "/blog" },
     { name: "اسلایدر", icon: <FiImage />, href: "/slider" },
-    { name: "ایمیل ها", icon: <FiMail />, href: "/email" },
+    { name: " پیام ها", icon: <FiMail />, href: "/email" },
   ];
   return (
     <>
