@@ -8,7 +8,7 @@ const Slider = () => {
   const GetSlider = async () => {
     try {
       const response = await fetch(
-        "https://adminhydrogenous.vercel.app/api/Sliders/GetSliders"
+        "http://localhost:3000/api/Sliders/GetSliders"
       );
       if (!response.ok) {
         throw new Error("Failed to fetch sliders");

@@ -1,0 +1,212 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model tbl_city {
+  city_id   BigInt     @id @default(autoincrement())
+  name_city String     @db.VarChar
+  state_id  BigInt?
+  tbl_state tbl_state? @relation(fields: [state_id], references: [state_id], onDelete: Cascade, onUpdate: Restrict)
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model tbl_comment {
+  comment_id      BigInt        @id @default(autoincrement())
+  comment_user    String?       @db.VarChar
+  comment_text    String
+  comment_score   Int
+  comment_like    BigInt?
+  comment_dislike BigInt?
+  comment_verify  Boolean
+  creat_comment   DateTime?     @db.Timestamptz(6)
+  product_id      BigInt
+  customer_id     BigInt?
+  tbl_customer    tbl_customer? @relation(fields: [customer_id], references: [customer_id], onDelete: Cascade, onUpdate: Restrict)
+  tbl_products    tbl_products  @relation(fields: [product_id], references: [product_id], onDelete: Cascade, onUpdate: Restrict)
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model tbl_credit_card {
+  id           BigInt       @id @default(autoincrement())
+  card_number  String       @db.VarChar
+  cust_id      BigInt
+  created_at   DateTime     @default(now()) @db.Timestamptz(6)
+  tbl_customer tbl_customer @relation(fields: [cust_id], references: [customer_id], onDelete: Cascade, onUpdate: Restrict)
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model tbl_customer {
+  customer_id     BigInt            @id @default(autoincrement())
+  first_name      String            @default("'10'::character varying") @db.VarChar(50)
+  last_name       String            @default("100") @db.VarChar(50)
+  phone_number    String            @db.VarChar
+  Email           String?           @db.VarChar
+  password        String
+  data_of_birth   DateTime?         @db.Date
+  create_Account  DateTime?         @db.Timestamptz(6)
+  tbl_comment     tbl_comment[]
+  tbl_credit_card tbl_credit_card[]
+  tbl_orders      tbl_orders[]
+  tbl_shipment    tbl_shipment[]
+  tbl_wish        tbl_wish[]
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model tbl_discount_code {
+  id             BigInt  @id @default(autoincrement())
+  discount_code  String? @db.VarChar
+  discount_value BigInt?
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model tbl_email {
+  id         BigInt    @id @default(autoincrement())
+  fn         String?   @db.VarChar
+  ln         String    @db.VarChar
+  email      String
+  subject    String
+  message    String
+  created_at DateTime? @default(now()) @db.Timestamptz(6)
+  answered   Boolean?  @default(false)
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model tbl_features {
+  feature_id      BigInt  @id @default(autoincrement())
+  feature_heading String
+  feature_content String
+  feature_image   String? @db.VarChar
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model tbl_mid_category {
+  m_c_id             BigInt            @id @default(autoincrement())
+  mid_category_name  String            @default("50") @db.VarChar
+  mid_category_photo String            @default("50") @db.VarChar
+t_category_id      BigInt?              @db.BigInt
+tbl_top_category   tbl_top_category?    @relation(fields: [t_category_id], references: [top_category_id], onDelete: Restrict)
+
+  tbl_products       tbl_products[]
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model tbl_orders {
+  order_id       BigInt        @id @default(autoincrement())
+  order_code     BigInt
+  l_products     Json?         @db.Json
+  total_price    BigInt
+  price_deliver  BigInt
+  order_date     DateTime      @default(now()) @db.Timestamp(6)
+  method_sending String        @db.VarChar
+  status_order   String        @db.VarChar
+  ship_id        BigInt?
+  cust_id        BigInt?
+  tbl_customer   tbl_customer? @relation(fields: [cust_id], references: [customer_id], onDelete: Cascade, onUpdate: Restrict)
+  tbl_shipment   tbl_shipment? @relation(fields: [ship_id], references: [shipment_id], onDelete: Cascade, onUpdate: Restrict)
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model tbl_post_images {
+  id         BigInt    @id @default(autoincrement())
+  post_id    BigInt
+  image_url  String    @db.VarChar
+  created_at DateTime  @db.Timestamptz(6)
+  tbl_posts  tbl_posts @relation(fields: [post_id], references: [post_id])
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model tbl_posts {
+  post_id            BigInt            @id @default(autoincrement())
+  post_title         String            @db.VarChar
+  post_feature_image String            @db.VarChar
+  post_content       String
+  post_published     Boolean
+  post_created_at    DateTime          @db.Timestamptz(6)
+  tbl_post_images    tbl_post_images[]
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model tbl_product_details {
+  product_d_id       BigInt       @id @default(autoincrement())
+  product_d_ing      String
+  product_d_usage    String
+  product_d_quantity String       @db.VarChar
+  product_d_weight   String?      @db.VarChar
+  product_d_shape    String       @db.VarChar
+  product_id         BigInt       @unique
+  tbl_products       tbl_products @relation(fields: [product_id], references: [product_id])
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model tbl_products {
+  product_id          BigInt               @id @default(autoincrement())
+  product_name        String
+  product_price       BigInt
+  discount_percent    Int?
+  discount_price      BigInt?
+  product_photo       String               @db.VarChar
+  stock               Int
+  view                BigInt?
+  number_of_sale      BigInt?
+  t_category_id       Int                  @db.SmallInt
+  m_category_id      BigInt?              @db.BigInt
+  active              Boolean?
+  special             Boolean?
+  tbl_comment         tbl_comment[]
+  tbl_product_details tbl_product_details?
+  tbl_mid_category   tbl_mid_category?    @relation(fields: [m_category_id], references: [m_c_id], onDelete: Restrict)
+  tbl_wish            tbl_wish[]
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model tbl_shipment {
+  shipment_id       BigInt        @id @default(autoincrement())
+  f_n_shipment      String        @default("") @db.VarChar
+  l_n_shipment      String        @default("") @db.VarChar
+  phone_shipment    String        @default("")
+  landline_shipment String?       @unique @default("")
+  address_shipment  String
+  state_shipment    String        @db.VarChar
+  city_shipment     String        @db.VarChar
+  zip_code_shipment String
+  cust_id           BigInt?
+  tbl_orders        tbl_orders[]
+  tbl_customer      tbl_customer? @relation(fields: [cust_id], references: [customer_id], onDelete: Restrict)
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model tbl_sliders {
+  slider_id    BigInt @id @default(autoincrement())
+  slider_image String @db.VarChar
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model tbl_state {
+  state_id   BigInt     @id @default(autoincrement())
+  state_name String     @db.VarChar
+  tbl_city   tbl_city[]
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model tbl_top_category {
+  top_category_id   BigInt             @id @default(autoincrement())
+  top_category_name String             @default("50") @db.VarChar
+  tbl_mid_category  tbl_mid_category[]
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model tbl_wish {
+  wish_id      BigInt       @id @default(autoincrement())
+  product_id   BigInt
+  customer_id  BigInt
+  tbl_customer tbl_customer @relation(fields: [customer_id], references: [customer_id], onDelete: Cascade, onUpdate: Restrict)
+  tbl_products tbl_products @relation(fields: [product_id], references: [product_id], onDelete: Cascade, onUpdate: Restrict)
+}
