@@ -1,11 +1,11 @@
-import { supabase } from "@/app/utils/client";
+import { prisma } from "@/app/lib/prisma";
+import superjson from "superjson";
 
 export async function GET() {
   try {
-    let { data: products, error } = await supabase
-      .from("tbl_customer")
-      .select("*");
-    return Response.json(products, { status: 200 });
+    const products = await prisma.tbl_customer.findMany();
+    const serialized = superjson.serialize(products);
+    return Response.json(serialized.json, { status: 200 });
   } catch (error) {
     return Response.json({ error: error.message }, { status: 500 });
   }

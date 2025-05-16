@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { supabase } from "@/app/utils/client";
+import { prisma } from "@/app/lib/prisma";
 import fs from "fs";
 import path from "path";
 
@@ -18,16 +18,11 @@ export async function POST(req) {
     const fileBuffer = Buffer.from(await productPhoto.arrayBuffer());
     fs.writeFileSync(savePath, fileBuffer);
 
-
-    const { data, error } = await supabase.from("tbl_sliders").insert([
-      {
-      slider_image: fileName, 
+    const data = await prisma.tbl_sliders.create({
+      data: {
+        slider_image: fileName,
       },
-    ]);
-
-    if (error) {
-      return NextResponse.json({ error: error.message }, { status: 500 });
-    }
+    });
 
     return NextResponse.json({ success: true, data }, { status: 201 });
 

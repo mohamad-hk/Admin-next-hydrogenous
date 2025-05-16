@@ -1,23 +1,20 @@
 import { NextResponse } from "next/server";
-import { supabase } from "@/app/utils/client";
+import { prisma } from "@/app/lib/prisma";
 
 export async function DELETE(req) {
   const { searchParams } = new URL(req.url);
   const p_id = searchParams.get("customer_id");
 
   if (!p_id) {
-    return NextResponse.json({ error: "No ship_id provided" }, { status: 400 });
+    return NextResponse.json({ error: "No customer_id provided" }, { status: 400 });
   }
 
   try {
-    const { error } = await supabase
-      .from("tbl_customer")
-      .delete()
-      .eq("customer_id", p_id);
-
-    if (error) {
-      return NextResponse.json({ error: error.message }, { status: 500 });
-    }
+    await prisma.tbl_customer.deleteMany({
+      where: {
+        customer_id: Number(p_id),
+      },
+    });
 
     return NextResponse.json(
       { message: "customer deleted successfully" },
