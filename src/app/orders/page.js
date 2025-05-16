@@ -21,7 +21,7 @@ const Order = () => {
     data: orders,
     error,
     isLoading,
-  } = useSWR("https://adminhydrogenous.vercel.app/api/GetOrders", fetcher);
+  } = useSWR("http://localhost:3000/api/GetOrders", fetcher);
 
   return (
     <>

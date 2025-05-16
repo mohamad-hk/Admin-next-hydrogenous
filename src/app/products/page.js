@@ -22,17 +22,14 @@ const Products = () => {
     data: products,
     error,
     isLoading,
-  } = useSWR(
-    `https://adminhydrogenous.vercel.app/api/Products/GetProducts`,
-    fetcher
-  );
+  } = useSWR(`http://localhost:3000/api/Products/GetProducts`, fetcher);
 
   // آیدی رو ست کنم
   // const {
   //   data: products,
   //   error,
   //   isLoading,
-  // } = useSWR("https://adminhydrogenous.vercel.appapi/GetProducts", fetcher);
+  // } = useSWR("http://localhost:3000api/GetProducts", fetcher);
 
   return (
     <>

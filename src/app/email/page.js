@@ -11,9 +11,7 @@ const Email = () => {
   const [emails, SetEmails] = useState();
   const GetSlider = async () => {
     try {
-      const response = await fetch(
-        "https://adminhydrogenous.vercel.app/api/Email/GetEmails"
-      );
+      const response = await fetch("http://localhost:3000/api/Email/GetEmails");
       if (!response.ok) {
         throw new Error("Failed to fetch sliders");
       }

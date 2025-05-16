@@ -16,7 +16,7 @@ const DeleteProduct = ({ p_id, refresh }) => {
   const removeAddress = async (input_params) => {
     try {
       const response = await fetch(
-        `https://adminhydrogenous.vercel.app/api/Products/DeleteProduct?${input_params}`,
+        `http://localhost:3000/api/Products/DeleteProduct?${input_params}`,
         {
           method: "DELETE",
           headers: {

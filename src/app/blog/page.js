@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Card, CardHeader, CardBody, Image} from "@heroui/react";
+import { Card, CardHeader, CardBody, Image } from "@heroui/react";
 import convertToPersianDate from "../utils/ConvertToPersianDate";
 import AddBlog from "../components/Blog/AddBlog";
 import BlogContent from "../components/Blog/BlogContent";
@@ -12,9 +12,7 @@ const Blog = () => {
   const [posts, setpost] = useState();
 
   const getpost = async () => {
-    const data = await fetch(
-      "https://adminhydrogenous.vercel.app/api/Posts/GetBlogs"
-    );
+    const data = await fetch("http://localhost:3000/api/Posts/GetBlogs");
     const response = await data.json();
     setpost(response);
   };
@@ -45,8 +43,8 @@ const Blog = () => {
                   </div>
                 </CardBody>
                 <div className=" flex flex-row items-center gap-3 justify-end me-2 mt-5">
-                <EditBlog post={post} onUpdate={getpost} />
-                <DeleteBlog postId={post.post_id} onDelete={getpost} />
+                  <EditBlog post={post} onUpdate={getpost} />
+                  <DeleteBlog postId={post.post_id} onDelete={getpost} />
                 </div>
               </Card>
             </>
