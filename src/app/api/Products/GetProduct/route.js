@@ -1,24 +1,21 @@
-import { prisma } from "@/app/lib/prisma";
-import superjson from "superjson";
+import pool from "@/app/lib/db"
 
 export async function GET(req) {
-  const { searchParams } = new URL(req.url);
-  const pId = searchParams.get("product_id");
+  const { searchParams } = new URL(req.url)
+  const pId = searchParams.get("product_id")
 
-  if (pId) {
-    try {
-      const shipments = await prisma.tbl_products.findMany({
-        where: {
-          product_id: Number(pId),
-        },
-      });
-
-      const serialized = superjson.serialize(shipments);
-      return Response.json(serialized.json, { status: 200 });
-    } catch (err) {
-      return Response.json({ error: err.message }, { status: 500 });
-    }
+  if (!pId) {
+    return Response.json({ error: "شناسه محصول ارسال نشده است." }, { status: 400 })
   }
 
-  return Response.json({ error: "شناسه محصول ارسال نشده است." }, { status: 400 });
+  try {
+    const result = await pool.query(
+      "SELECT * FROM tbl_products WHERE product_id = $1",
+      [Number(pId)]
+    )
+
+    return Response.json(result.rows, { status: 200 })
+  } catch (err) {
+    return Response.json({ error: err.message }, { status: 500 })
+  }
 }
